@@ -1,0 +1,52 @@
+?- pure_literal_eliminate([[true-X]],[X],Cs,Vs).
+Cs = [],
+Vs = [true] ;
+false.
+
+?- pure_literal_eliminate([[true-X],[true-X]],[X],Cs,Vs).
+Cs = [],
+Vs = [true] ;
+false.
+
+?- pure_literal_eliminate([[true-X],[false-X]],[X],Cs,Vs).
+Cs = [[true-X], [false-X]],
+Vs = [X] ;
+false.
+
+?- pure_literal_eliminate([[true-X,false-Y],[false-X]],[X,Y],Cs,Vs).
+Cs = [[false-X]],
+Vs = [X, false] ;
+false.
+
+?- pure_literal_eliminate([[true-X,false-Y],[false-X,false-Y],[true-Y]],[X,Y],Cs,Vs).
+Cs = [[true-X, false-Y], [false-X, false-Y], [true-Y]],
+Vs = [X, Y] .
+
+?- pure_literal_eliminate([[true-X,false-Y],[false-X,false-Y],[true-Y]],[X,Y],Cs,Vs).
+Cs = [[true-X, false-Y], [false-X, false-Y], [true-Y]],
+Vs = [X, Y] ;
+false.
+
+?- pure_literal_eliminate([[true-X,false-Y],[false-X,false-Y],[true-Y,true-Z]],[X,Y,Z],Cs,Vs)
+.
+Cs = [[true-X, false-Y], [false-X, false-Y]],
+Vs = [X, Y, true] ;
+false.
+
+?- pure_literal_eliminate([[true-X,false-Y],[false-X,false-Y],[true-Y,true-Z,false-Z]],[X,Y,Z
+],Cs,Vs).
+Cs = [[true-X, false-Y], [false-X, false-Y], [true-Y, true-Z, false-Z]],
+Vs = [X, Y, Z] ;
+false.
+
+?- pure_literal_eliminate([[true-X,false-Y],[false-X,false-Y],[true-Y,true-Z],[true-Y]],[X,Y,
+Z],Cs,Vs).
+Cs = [[true-X, false-Y], [false-X, false-Y], [true-Y]],
+Vs = [X, Y, true] ;
+false.
+
+?- pure_literal_eliminate([[true-X,false-Y],[false-X,false-Y],[true-Y,true-Z],[true-Y,false-Z
+]],[X,Y,Z],Cs,Vs).
+Cs = [[true-X, false-Y], [false-X, false-Y], [true-Y, true-Z], [true-Y, false-Z]],
+Vs = [X, Y, Z] ;
+false.
